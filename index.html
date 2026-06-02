@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>KromaForge - Premium Free Online Image Editor & Tool Suite</title>
+    <meta name="description" content="Edit, crop, resize, pad, compress, rotate, draw, and filter your images locally inside your browser with KromaForge. Secure, lightning-fast, and 100% private.">
+    <meta name="keywords" content="free online image editor, browser photo editor, crop resize filter images, client side image tools, no upload image editor, KromaForge">
+    <meta name="author" content="KromaForge Studio">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/index.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Premium Free Online Image Editor & Tool Suite">
+    <meta property="og:description" content="Edit, crop, resize, pad, compress, rotate, draw, and filter your images locally inside your browser with KromaForge. Secure, lightning-fast, and 100% private.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/index.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Premium Free Online Image Editor & Tool Suite">
+    <meta name="twitter:description" content="Edit, crop, resize, pad, compress, rotate, draw, and filter your images locally inside your browser with KromaForge. Secure, lightning-fast, and 100% private.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Ambient Glows -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Header (Injected by shared.js) -->
+    <header class="app-header"></header>
+
+    <!-- Main Content Container -->
+    <main class="app-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <span class="hero-tag">Client-Side & 100% Private</span>
+            <h1 class="hero-title">Forge Perfect Images<br>Right in Your Browser.</h1>
+            <p class="hero-desc">
+                An ultra-fast, professional suite of 10 image editing tools. No servers, no sign-ups, and complete file privacy because your photos never leave your device.
+            </p>
+
+            <!-- Drag & Drop Zone -->
+            <div class="dropzone-container">
+                <div class="dropzone glass-panel" id="dropzone">
+                    <span class="dropzone-icon">📁</span>
+                    <h3 class="dropzone-title">Drag & drop your image here</h3>
+                    <p class="dropzone-subtitle">Supports PNG, JPEG, WEBP, GIF (Max 100MB)</p>
+                    <button class="btn btn-primary" id="upload-btn">Browse Files</button>
+                    <input type="file" id="file-input" class="file-input" accept="image/*">
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Grid Section -->
+        <section class="tools-section">
+            <h2 class="section-header">Select an Editing Tool</h2>
+            
+            <!-- Search & Filter Controls -->
+            <div class="search-filter-container glass-panel">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="tool-search" class="tool-search-input" placeholder="Search editing tools (e.g. crop, resize, watermark)...">
+                </div>
+                <div class="filter-tags" id="filter-tags">
+                    <button class="filter-btn active" data-filter="all">All Tools</button>
+                    <button class="filter-btn" data-filter="geometry">📐 Geometry</button>
+                    <button class="filter-btn" data-filter="creative">🎨 Creative</button>
+                    <button class="filter-btn" data-filter="utility">💾 Utility</button>
+                    <button class="filter-btn" data-filter="retro">👾 Retro</button>
+                </div>
+            </div>
+
+            <div class="tools-grid" id="tools-grid">
+                <a href="crop.html" class="tool-card glass-panel" data-tool="crop" data-categories="geometry">
+                    <div class="tool-category-badge">Geometry</div>
+                    <div class="tool-icon-wrapper">✂️</div>
+                    <h3 class="tool-name">Image Cropper</h3>
+                    <p class="tool-desc">Cut, trim, and frame images into preset aspect ratios (16:9, 1:1, 4:3) or freeform constraints.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="resize.html" class="tool-card glass-panel" data-tool="resize" data-categories="geometry">
+                    <div class="tool-category-badge">Geometry</div>
+                    <div class="tool-icon-wrapper">📐</div>
+                    <h3 class="tool-name">Image Resizer</h3>
+                    <p class="tool-desc">Accurately scale dimensions in pixels or percentages. Lock aspect ratios to prevent distortion.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="filter.html" class="tool-card glass-panel" data-tool="filter" data-categories="creative">
+                    <div class="tool-category-badge">Creative</div>
+                    <div class="tool-icon-wrapper">🎨</div>
+                    <h3 class="tool-name">Filters & Adjust</h3>
+                    <p class="tool-desc">Fine-tune exposure, saturation, and contrast. Apply vintage, noir, or cinematic preset filters.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="rotate.html" class="tool-card glass-panel" data-tool="rotate" data-categories="geometry">
+                    <div class="tool-category-badge">Geometry</div>
+                    <div class="tool-icon-wrapper">🔄</div>
+                    <h3 class="tool-name">Flip & Rotate</h3>
+                    <p class="tool-desc">Rotate your image to custom angles or spin it 90 degrees. Flip horizontally or vertically instantly.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="convert.html" class="tool-card glass-panel" data-tool="convert" data-categories="utility">
+                    <div class="tool-category-badge">Utility</div>
+                    <div class="tool-icon-wrapper">💾</div>
+                    <h3 class="tool-name">Convert & Compress</h3>
+                    <p class="tool-desc">Convert formats (PNG, JPG, WebP, GIF) and compress quality to reduce file sizes with real-time feedback.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="pad.html" class="tool-card glass-panel" data-tool="pad" data-categories="geometry">
+                    <div class="tool-category-badge">Geometry</div>
+                    <div class="tool-icon-wrapper">🔳</div>
+                    <h3 class="tool-name">Aspect Fitter</h3>
+                    <p class="tool-desc">Fit photos into target ratios (like Instagram squares) by adding solid color border margins or gorgeous blurred background cushions.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="text.html" class="tool-card glass-panel" data-tool="text" data-categories="creative">
+                    <div class="tool-category-badge">Creative</div>
+                    <div class="tool-icon-wrapper">✍️</div>
+                    <h3 class="tool-name">Text & Watermark</h3>
+                    <p class="tool-desc">Overlay custom typographic layers, copyright text, or upload watermark logos. Set position, colors, fonts, and opacity.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="draw.html" class="tool-card glass-panel" data-tool="draw" data-categories="creative">
+                    <div class="tool-category-badge">Creative</div>
+                    <div class="tool-icon-wrapper">🖌️</div>
+                    <h3 class="tool-name">Drawing & Annotation</h3>
+                    <p class="tool-desc">Draw lines, arrows, highlights, circles, and freeform sketches directly on images. Perfect for quick annotations.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="retro.html" class="tool-card glass-panel" data-tool="retro" data-categories="retro">
+                    <div class="tool-category-badge">Retro</div>
+                    <div class="tool-icon-wrapper">👾</div>
+                    <h3 class="tool-name">Retro & Pixel Art</h3>
+                    <p class="tool-desc">Convert your high-res photography into gorgeous retro 8-bit/16-bit pixel art. Adjust block sizes and posterization.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+                <a href="meme.html" class="tool-card glass-panel" data-tool="meme" data-categories="retro">
+                    <div class="tool-category-badge">Retro</div>
+                    <div class="tool-icon-wrapper">🤪</div>
+                    <h3 class="tool-name">Meme Generator</h3>
+                    <p class="tool-desc">Add classic bold outlined IMPACT text at the top or bottom of your images to create templates and viral memes instantly.</p>
+                    <span class="tool-arrow">Launch Tool &rarr;</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Resume Editing Banner -->
+    <div class="resume-banner glass-panel" id="resume-banner">
+        <span class="resume-banner-text">📂 Active session found! Resume editing your current image.</span>
+        <button class="btn btn-primary" id="resume-btn">✏️ Resume</button>
+        <button class="btn btn-danger" id="clear-btn">🗑️ Clear</button>
+        <button class="resume-banner-close" id="close-banner-btn">&times;</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropzone = document.getElementById('dropzone');
+            const uploadBtn = document.getElementById('upload-btn');
+            const fileInput = document.getElementById('file-input');
+            const resumeBanner = document.getElementById('resume-banner');
+            const resumeBtn = document.getElementById('resume-btn');
+            const clearBtn = document.getElementById('clear-btn');
+            const closeBannerBtn = document.getElementById('close-banner-btn');
+
+            // Click upload button triggers hidden input file
+            uploadBtn.addEventListener('click', () => fileInput.click());
+
+            // Handle file input selection
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) handleImageFile(file);
+            });
+
+            // Drag and Drop events
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('dragover');
+            });
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    handleImageFile(file);
+                } else {
+                    window.KromaUI.showToast('Please select a valid image file.', 'danger');
+                }
+            });
+
+            // Save to IndexedDB and navigate
+            function handleImageFile(file) {
+                window.KromaDB.clearAll().then(() => {
+                    return window.KromaDB.setFilename(file.name);
+                }).then(() => {
+                    // Set active blob
+                    return window.KromaDB.setActiveImage(file);
+                }).then(() => {
+                    // Set original blob
+                    return window.KromaDB.setOriginalImage(file);
+                }).then(() => {
+                    window.KromaUI.showToast('Image loaded! Redirecting to Cropper...');
+                    setTimeout(() => {
+                        window.location.href = 'crop.html';
+                    }, 800);
+                }).catch(err => {
+                    console.error('Error storing image:', err);
+                    window.KromaUI.showToast('Failed to load image.', 'danger');
+                });
+            }
+
+            // Check if active session exists
+            window.KromaDB.getActiveImage().then(blob => {
+                if (blob) {
+                    resumeBanner.classList.add('show');
+                }
+            });
+
+            // Resume btn redirect to crop
+            resumeBtn.addEventListener('click', () => {
+                window.location.href = 'crop.html';
+            });
+
+            // Clear session btn
+            clearBtn.addEventListener('click', () => {
+                window.KromaDB.clearAll().then(() => {
+                    resumeBanner.classList.remove('show');
+                    window.KromaUI.showToast('Session cleared.', 'info');
+                });
+            });
+
+            // Close banner
+            closeBannerBtn.addEventListener('click', () => {
+                resumeBanner.classList.remove('show');
+            });
+
+            // Interactive Search and Tag Filter
+            const searchInput = document.getElementById('tool-search');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+
+            function filterTools() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const activeFilterBtn = document.querySelector('.filter-btn.active');
+                const activeFilter = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
+
+                toolCards.forEach(card => {
+                    const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                    const toolDesc = card.querySelector('.tool-desc').textContent.toLowerCase();
+                    const categories = card.getAttribute('data-categories').split(' ');
+
+                    const matchesSearch = toolName.includes(searchTerm) || toolDesc.includes(searchTerm);
+                    const matchesCategory = activeFilter === 'all' || categories.includes(activeFilter);
+
+                    if (matchesSearch && matchesCategory) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+            }
+
+            searchInput.addEventListener('input', filterTools);
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterTools();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

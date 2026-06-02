@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Retro & Pixel Art Converter</title>
+    <meta name="description" content="Convert images to retro pixel art, posterize colors, and apply authentic CRT arcade scanlines.">
+    <meta name="keywords" content="pixel art converter, retro image filter, 8 bit photo effect, posterize image, CRT scanline effect">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/retro.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Retro & Pixel Art Converter">
+    <meta property="og:description" content="Convert images to retro pixel art, posterize colors, and apply authentic CRT arcade scanlines.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/retro.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Retro & Pixel Art Converter">
+    <meta name="twitter:description" content="Convert images to retro pixel art, posterize colors, and apply authentic CRT arcade scanlines.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">👾 Retro & Pixel Art</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Side Panel -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Pixelation</h3>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Block Size</span>
+                        <span class="control-value" id="pixel-val">1px (None)</span>
+                    </div>
+                    <input type="range" id="pixel-slider" min="1" max="64" value="1">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Color Depth (Posterize)</h3>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Color Levels</span>
+                        <span class="control-value" id="poster-val">32 (High)</span>
+                    </div>
+                    <input type="range" id="poster-slider" min="2" max="32" value="32">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Retro Effects</h3>
+                <div class="control-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" id="scanlines-chk">
+                        CRT Scanlines Overlay
+                    </label>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">👾 Apply Pixelation</button>
+                <button class="btn btn-secondary" id="apply-next-btn">🤪 Apply & Meme Maker</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/retro.js"></script>
+</body>
+</html>

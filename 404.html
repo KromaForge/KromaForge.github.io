@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - KromaForge</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-code {
+            font-family: var(--font-heading);
+            font-size: 6rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .error-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .error-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .error-panel {
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Glows -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Header (Injected by shared.js) -->
+    <header class="app-header"></header>
+
+    <!-- Main Content -->
+    <main class="app-container" style="display: flex; align-items: center; min-height: calc(100vh - 120px);">
+        <div class="error-container">
+            <div class="error-panel glass-panel">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Lost in the Canvas?</h1>
+                <p class="error-desc">We couldn't find the page or tool you were looking for. Don't worry, your images are safe in local storage.</p>
+                <a href="index.html" class="btn btn-primary" style="display: inline-block;">🏠 Return to Dashboard</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+</body>
+</html>

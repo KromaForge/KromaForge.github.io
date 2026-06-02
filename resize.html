@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Image Resizer Tool</title>
+    <meta name="description" content="Resize your image by width, height, or percentage, maintaining aspect ratios.">
+    <meta name="keywords" content="resize image online, scale image pixels, reduce image size, image resizer free, change image dimensions">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/resize.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Image Resizer Tool">
+    <meta property="og:description" content="Resize your image by width, height, or percentage, maintaining aspect ratios.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/resize.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Image Resizer Tool">
+    <meta name="twitter:description" content="Resize your image by width, height, or percentage, maintaining aspect ratios.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">📐 Image Resizer</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Side Panel -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Current Resolution</h3>
+                <div class="control-group">
+                    <label class="control-label">Original dimensions</label>
+                    <div class="control-value" id="original-resolution">0 x 0 px</div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Custom Dimensions</h3>
+                
+                <div class="control-group">
+                    <label class="control-label">Width (pixels)</label>
+                    <input type="number" class="input-text" id="resize-width" min="1">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Height (pixels)</label>
+                    <input type="number" class="input-text" id="resize-height" min="1">
+                </div>
+
+                <div class="control-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" id="lock-ratio" checked>
+                        Lock Aspect Ratio
+                    </label>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Percentage Presets</h3>
+                <div class="grid-select" id="percent-selector">
+                    <button class="grid-select-btn" data-percent="25">25%</button>
+                    <button class="grid-select-btn" data-percent="50">50%</button>
+                    <button class="grid-select-btn" data-percent="75">75%</button>
+                    <button class="grid-select-btn" data-percent="200">200%</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Scaling Quality</h3>
+                <div class="control-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" id="smooth-scaling" checked>
+                        Smooth Scaling (Bilinear)
+                    </label>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">📐 Apply Resize</button>
+                <button class="btn btn-secondary" id="apply-next-btn">🎨 Apply & Filters</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/resize.js"></script>
+</body>
+</html>

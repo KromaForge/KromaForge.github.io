@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Convert & Compress Tool</title>
+    <meta name="description" content="Convert image formats to PNG, JPEG, or WebP, and adjust compression quality.">
+    <meta name="keywords" content="convert image format, png to jpg, compress image online, webp converter, reduce file size, image compression">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/convert.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Convert & Compress Tool">
+    <meta property="og:description" content="Convert image formats to PNG, JPEG, or WebP, and adjust compression quality.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/convert.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Convert & Compress Tool">
+    <meta name="twitter:description" content="Convert image formats to PNG, JPEG, or WebP, and adjust compression quality.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .size-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .size-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        .size-row:last-child {
+            margin-bottom: 0;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--border-color);
+        }
+        .savings-tag {
+            color: var(--color-success);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">💾 Convert & Compress</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Side Settings -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Output Format</h3>
+                <div class="grid-select" id="format-selector">
+                    <button class="grid-select-btn" data-format="image/png">PNG</button>
+                    <button class="grid-select-btn active" data-format="image/jpeg">JPEG</button>
+                    <button class="grid-select-btn" data-format="image/webp">WEBP</button>
+                </div>
+            </div>
+
+            <div class="panel-section" id="quality-section">
+                <h3 class="panel-section-title">Compression Quality</h3>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Quality</span>
+                        <span class="control-value" id="quality-value">85%</span>
+                    </div>
+                    <input type="range" id="quality-slider" min="10" max="100" value="85">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">File Size Comparison</h3>
+                <div class="size-box">
+                    <div class="size-row">
+                        <span>Original Size:</span>
+                        <span id="original-size">0 KB</span>
+                    </div>
+                    <div class="size-row">
+                        <span>New Estimated Size:</span>
+                        <span class="control-value" id="new-size">0 KB</span>
+                    </div>
+                    <div class="size-row" id="savings-row">
+                        <span>Size Reduction:</span>
+                        <span class="savings-tag" id="savings-value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-next-btn">🔳 Save & Aspect Fitter</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/convert.js"></script>
+</body>
+</html>

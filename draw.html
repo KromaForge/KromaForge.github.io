@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Drawing & Annotation Tool</title>
+    <meta name="description" content="Annotate images with freehand drawing, lines, arrows, rectangles, and circles in custom colors.">
+    <meta name="keywords" content="draw on image, annotate photo, image annotation tool, add arrows to image, freehand drawing on photo">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/draw.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Drawing & Annotation Tool">
+    <meta property="og:description" content="Annotate images with freehand drawing, lines, arrows, rectangles, and circles in custom colors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/draw.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Drawing & Annotation Tool">
+    <meta name="twitter:description" content="Annotate images with freehand drawing, lines, arrows, rectangles, and circles in custom colors.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .color-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .swatch {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .swatch:hover {
+            transform: scale(1.1);
+        }
+        .swatch.active {
+            border-color: var(--text-primary);
+            transform: scale(1.05);
+        }
+        .custom-picker-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .color-picker {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+        }
+        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker::-webkit-color-swatch {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">🖌️ Drawing & Annotation</h1>
+                <div class="viewport-actions">
+                    <button class="btn" id="undo-btn">↩️ Undo</button>
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas" style="cursor: crosshair;"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right settings panel -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Annotation Tool</h3>
+                <div class="grid-select" id="tool-selector">
+                    <button class="grid-select-btn active" data-tool="free">🖌️ Brush</button>
+                    <button class="grid-select-btn" data-tool="line">📏 Line</button>
+                    <button class="grid-select-btn" data-tool="arrow">➡️ Arrow</button>
+                    <button class="grid-select-btn" data-tool="rect">⬜ Rect</button>
+                    <button class="grid-select-btn" data-tool="circle">⚪ Circle</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Color Palette</h3>
+                <div class="color-swatches" id="color-swatches">
+                    <div class="swatch active" style="background-color: #ef4444;" data-color="#ef4444"></div>
+                    <div class="swatch" style="background-color: #f97316;" data-color="#f97316"></div>
+                    <div class="swatch" style="background-color: #eab308;" data-color="#eab308"></div>
+                    <div class="swatch" style="background-color: #22c55e;" data-color="#22c55e"></div>
+                    <div class="swatch" style="background-color: #3b82f6;" data-color="#3b82f6"></div>
+                    <div class="swatch" style="background-color: #a855f7;" data-color="#a855f7"></div>
+                    <div class="swatch" style="background-color: #ffffff;" data-color="#ffffff"></div>
+                    <div class="swatch" style="background-color: #000000;" data-color="#000000"></div>
+                </div>
+                <div class="custom-picker-row">
+                    <input type="color" class="color-picker" id="custom-color" value="#ef4444">
+                    <span class="control-label">Custom Palette Color</span>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Brush Properties</h3>
+                
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Brush Size</span>
+                        <span class="control-value" id="size-val">5px</span>
+                    </div>
+                    <input type="range" id="brush-size" min="1" max="50" value="5">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Brush Opacity</span>
+                        <span class="control-value" id="opacity-val">100%</span>
+                    </div>
+                    <input type="range" id="brush-opacity" min="10" max="100" value="100">
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">🖌️ Apply Drawing</button>
+                <button class="btn btn-secondary" id="apply-next-btn">👾 Apply & Retro Art</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/draw.js"></script>
+</body>
+</html>

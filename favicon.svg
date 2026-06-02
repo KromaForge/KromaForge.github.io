@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="primary-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  <!-- Modern hexagon diamond background -->
+  <path d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z" fill="url(#primary-grad)" />
+  <!-- Inner stylized 'K' symbol in negative space / white -->
+  <path d="M10 8 H13 V24 H10 Z" fill="#ffffff" />
+  <path d="M13 15 L19 8 H23 L16 16 L23 24 H19 L13 17 Z" fill="#ffffff" />
+</svg>

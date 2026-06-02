@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Text & Watermark Adder</title>
+    <meta name="description" content="Add draggable text layers, custom styling, or upload watermark logos to protect your images.">
+    <meta name="keywords" content="add text to image, watermark maker, image text overlay, copyright text on photo, logo watermark">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/text.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Text & Watermark Adder">
+    <meta property="og:description" content="Add draggable text layers, custom styling, or upload watermark logos to protect your images.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/text.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Text & Watermark Adder">
+    <meta name="twitter:description" content="Add draggable text layers, custom styling, or upload watermark logos to protect your images.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .drag-tip {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            color: var(--text-secondary);
+        }
+        .text-color-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        .picker-field {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .color-picker {
+            appearance: none;
+            -webkit-appearance: none;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+        }
+        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker::-webkit-color-swatch {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        .logo-preview-box {
+            display: none;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">✍️ Text & Watermark</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <div class="drag-tip">💡 Click & drag the text on the image to reposition it</div>
+                    <canvas id="editor-canvas" class="editor-canvas" style="cursor: default;"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Control Panel -->
+        <section class="editor-control-panel">
+            <!-- Text Layer Control -->
+            <div class="panel-section">
+                <h3 class="panel-section-title">Text Overlays</h3>
+                
+                <div class="control-group">
+                    <label class="control-label">Text Content</label>
+                    <input type="text" class="input-text" id="text-content" value="KromaForge">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Font Family</label>
+                    <select class="select-input" id="font-family">
+                        <option value="Outfit, sans-serif">Outfit (Modern)</option>
+                        <option value="Inter, sans-serif">Inter (Clean)</option>
+                        <option value="Georgia, serif">Georgia (Serif)</option>
+                        <option value="Courier New, monospace">Courier New (Mono)</option>
+                        <option value="Impact, Charcoal, sans-serif">Impact (Bold)</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <div class="control-group">
+                        <label class="control-label">Size (px)</label>
+                        <input type="number" class="input-text" id="font-size" value="48" min="10" max="300">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Opacity</label>
+                        <input type="range" id="text-opacity" min="0" max="100" value="100">
+                    </div>
+                </div>
+
+                <div class="text-color-row">
+                    <div class="picker-field">
+                        <input type="color" class="color-picker" id="text-color" value="#ffffff">
+                        <span class="control-label">Fill</span>
+                    </div>
+                    <div class="picker-field">
+                        <input type="color" class="color-picker" id="outline-color" value="#000000">
+                        <span class="control-label">Stroke</span>
+                    </div>
+                </div>
+
+                <div class="control-group" style="margin-top: 1rem;">
+                    <div class="control-label">
+                        <span>Stroke Width</span>
+                        <span class="control-value" id="stroke-val">2px</span>
+                    </div>
+                    <input type="range" id="stroke-width" min="0" max="15" value="2">
+                </div>
+            </div>
+
+            <!-- Logo Watermark Layer -->
+            <div class="panel-section">
+                <h3 class="panel-section-title">Image Watermark</h3>
+                <div class="control-group">
+                    <button class="btn" style="width: 100%;" onclick="document.getElementById('logo-upload').click()">📂 Upload Logo Image</button>
+                    <input type="file" id="logo-upload" class="file-input" accept="image/*">
+                </div>
+
+                <div class="logo-preview-box" id="logo-preview-box">
+                    <span style="font-size: 0.8rem;" id="logo-filename">logo.png</span>
+                    <button class="btn btn-danger btn-icon-only" id="logo-remove" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">✕</button>
+                </div>
+
+                <div id="logo-controls" style="display: none; margin-top: 1rem;">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>Logo Scale</span>
+                            <span class="control-value" id="logo-scale-val">20%</span>
+                        </div>
+                        <input type="range" id="logo-scale" min="5" max="100" value="20">
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>Logo Opacity</span>
+                            <span class="control-value" id="logo-opacity-val">50%</span>
+                        </div>
+                        <input type="range" id="logo-opacity" min="0" max="100" value="50">
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">✍️ Apply Layers</button>
+                <button class="btn btn-secondary" id="apply-next-btn">🖌️ Apply & Draw</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/text.js"></script>
+</body>
+</html>

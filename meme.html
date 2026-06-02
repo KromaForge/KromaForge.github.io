@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Meme Generator Tool</title>
+    <meta name="description" content="Add classic impact meme text overlays at the top and bottom of your images instantly.">
+    <meta name="keywords" content="meme generator, add text to meme, impact font meme, meme maker online, create meme free">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/meme.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Meme Generator Tool">
+    <meta property="og:description" content="Add classic impact meme text overlays at the top and bottom of your images instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/meme.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Meme Generator Tool">
+    <meta name="twitter:description" content="Add classic impact meme text overlays at the top and bottom of your images instantly.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">🤪 Meme Generator</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right settings panel -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Meme Text Layer</h3>
+                
+                <div class="control-group">
+                    <label class="control-label">Top Text</label>
+                    <input type="text" class="input-text" id="meme-top" value="WHEN YOU CODE">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Bottom Text</label>
+                    <input type="text" class="input-text" id="meme-bottom" value="WITHOUT A PLAN">
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title font-section">Typography</h3>
+                
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Text Size</span>
+                        <span class="control-value" id="size-val">52px</span>
+                    </div>
+                    <input type="range" id="text-size" min="20" max="120" value="52">
+                </div>
+
+                <div class="control-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="checkbox-input" id="caps-chk" checked>
+                        Force Uppercase Letters
+                    </label>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Meme</button>
+                <button class="btn btn-secondary" id="apply-btn">💾 Save Canvas Changes</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/meme.js"></script>
+</body>
+</html>

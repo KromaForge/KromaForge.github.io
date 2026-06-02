@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Image Cropper Tool</title>
+    <meta name="description" content="Crop and trim your images online to standard ratios or custom freeform shapes.">
+    <meta name="keywords" content="crop image online, free image cropper, aspect ratio crop tool, trim photo online, 16:9 crop, square crop">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/crop.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Image Cropper Tool">
+    <meta property="og:description" content="Crop and trim your images online to standard ratios or custom freeform shapes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/crop.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Image Cropper Tool">
+    <meta name="twitter:description" content="Crop and trim your images online to standard ratios or custom freeform shapes.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Tool-specific cropping styles */
+        .crop-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+            z-index: 5;
+        }
+        .crop-box {
+            position: absolute;
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6), 0 0 15px rgba(99, 102, 241, 0.5);
+            cursor: move;
+            z-index: 6;
+            touch-action: none;
+        }
+        /* Crop grid rule of thirds */
+        .crop-grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            pointer-events: none;
+        }
+        .crop-grid-line {
+            border: 0.5px dashed rgba(255, 255, 255, 0.4);
+        }
+        .crop-grid-line:nth-child(3n) { border-right: none; }
+        .crop-grid-line:nth-child(n+7) { border-bottom: none; }
+
+        /* Handles */
+        .crop-handle {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--text-primary);
+            border: 2px solid var(--color-primary);
+            border-radius: 50%;
+            z-index: 7;
+        }
+        .handle-tl { top: -7px; left: -7px; cursor: nwse-resize; }
+        .handle-tr { top: -7px; right: -7px; cursor: nesw-resize; }
+        .handle-bl { bottom: -7px; left: -7px; cursor: nesw-resize; }
+        .handle-br { bottom: -7px; right: -7px; cursor: nwse-resize; }
+    </style>
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <!-- Sidebar Navigation (Injected by shared.js) -->
+        <aside class="editor-sidebar"></aside>
+
+        <!-- Viewport Area -->
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">✂️ Image Cropper</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Canvas Workspace -->
+            <div class="canvas-wrapper" id="canvas-wrapper">
+                <div class="canvas-container" id="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                    <!-- Interative Crop Box sits here -->
+                    <div id="crop-box" class="crop-box">
+                        <div class="crop-grid">
+                            <div class="crop-grid-line"></div><div class="crop-grid-line"></div><div class="crop-grid-line"></div>
+                            <div class="crop-grid-line"></div><div class="crop-grid-line"></div><div class="crop-grid-line"></div>
+                            <div class="crop-grid-line"></div><div class="crop-grid-line"></div><div class="crop-grid-line"></div>
+                        </div>
+                        <div class="crop-handle handle-tl"></div>
+                        <div class="crop-handle handle-tr"></div>
+                        <div class="crop-handle handle-bl"></div>
+                        <div class="crop-handle handle-br"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Controls Sidebar -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Aspect Ratio</h3>
+                <div class="grid-select" id="ratio-selector">
+                    <button class="grid-select-btn active" data-ratio="free">Free</button>
+                    <button class="grid-select-btn" data-ratio="1">1:1</button>
+                    <button class="grid-select-btn" data-ratio="1.777">16:9</button>
+                    <button class="grid-select-btn" data-ratio="0.562">9:16</button>
+                    <button class="grid-select-btn" data-ratio="1.333">4:3</button>
+                    <button class="grid-select-btn" data-ratio="0.75">3:4</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Manual Selection</h3>
+                <div class="input-row">
+                    <div class="control-group">
+                        <label class="control-label">Width (px)</label>
+                        <input type="text" class="input-text" id="crop-width" readonly>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Height (px)</label>
+                        <input type="text" class="input-text" id="crop-height" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apply Actions -->
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">✂️ Apply Crop</button>
+                <button class="btn btn-secondary" id="apply-next-btn">💾 Apply & Next Tool</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/crop.js"></script>
+</body>
+</html>

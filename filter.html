@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Filters & Adjustments</title>
+    <meta name="description" content="Apply cinematic presets and customize brightness, contrast, saturation, sepia, and hue.">
+    <meta name="keywords" content="photo filter online, image brightness contrast, vintage filter, noir filter, color adjustment tool, saturation editor">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/filter.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Filters & Adjustments">
+    <meta property="og:description" content="Apply cinematic presets and customize brightness, contrast, saturation, sepia, and hue.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/filter.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Filters & Adjustments">
+    <meta name="twitter:description" content="Apply cinematic presets and customize brightness, contrast, saturation, sepia, and hue.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .compare-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            user-select: none;
+            transition: var(--transition-fast);
+        }
+        .compare-btn:active {
+            background: var(--color-primary);
+            color: white;
+        }
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+        .preset-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition-fast);
+        }
+        .preset-card:hover {
+            border-color: var(--border-color-hover);
+        }
+        .preset-card.active {
+            border-color: var(--color-primary);
+            background: rgba(99, 102, 241, 0.08);
+        }
+        .preset-preview-thumb {
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        .preset-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">🎨 Filters & Adjustments</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container" style="position: relative;">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                    <button class="compare-btn" id="compare-btn">Press & Hold to Compare</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right side settings panel -->
+        <section class="editor-control-panel">
+            <!-- Manual Sliders -->
+            <div class="panel-section">
+                <h3 class="panel-section-title">Manual Adjustments</h3>
+                
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Brightness</span>
+                        <span class="control-value" id="val-brightness">100%</span>
+                    </div>
+                    <input type="range" id="brightness" min="0" max="200" value="100">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Contrast</span>
+                        <span class="control-value" id="val-contrast">100%</span>
+                    </div>
+                    <input type="range" id="contrast" min="0" max="200" value="100">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Saturation</span>
+                        <span class="control-value" id="val-saturation">100%</span>
+                    </div>
+                    <input type="range" id="saturation" min="0" max="200" value="100">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Hue Rotation</span>
+                        <span class="control-value" id="val-hue">0°</span>
+                    </div>
+                    <input type="range" id="hue" min="0" max="360" value="0">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Blur</span>
+                        <span class="control-value" id="val-blur">0px</span>
+                    </div>
+                    <input type="range" id="blur" min="0" max="20" value="0">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Sepia</span>
+                        <span class="control-value" id="val-sepia">0%</span>
+                    </div>
+                    <input type="range" id="sepia" min="0" max="100" value="0">
+                </div>
+            </div>
+
+            <!-- Preset Filters -->
+            <div class="panel-section">
+                <h3 class="panel-section-title">Preset Filters</h3>
+                <div class="presets-grid" id="presets-grid">
+                    <div class="preset-card active" data-preset="normal">
+                        <div class="preset-title">Original</div>
+                    </div>
+                    <div class="preset-card" data-preset="vintage">
+                        <div class="preset-title">Vintage Chrome</div>
+                    </div>
+                    <div class="preset-card" data-preset="noir">
+                        <div class="preset-title">Noir Gray</div>
+                    </div>
+                    <div class="preset-card" data-preset="vibrant">
+                        <div class="preset-title">Vibrant Pop</div>
+                    </div>
+                    <div class="preset-card" data-preset="cool">
+                        <div class="preset-title">Cool Breeze</div>
+                    </div>
+                    <div class="preset-card" data-preset="warm">
+                        <div class="preset-title">Sunset Warmth</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">🎨 Apply Filters</button>
+                <button class="btn btn-secondary" id="apply-next-btn">🔄 Apply & Rotate</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/filter.js"></script>
+</body>
+</html>

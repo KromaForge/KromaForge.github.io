@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KromaForge - Flip & Rotate Tool</title>
+    <meta name="description" content="Rotate your images by 90 degrees, fine angles, or flip horizontally and vertically.">
+    <meta name="keywords" content="rotate image online, flip image horizontally, mirror image, rotate photo 90 degrees, image rotation tool">
+    <link rel="canonical" href="https://progameryt01.github.io/KromaForge/rotate.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="KromaForge - Flip & Rotate Tool">
+    <meta property="og:description" content="Rotate your image to any degree angle, and mirror it horizontally or vertically.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://progameryt01.github.io/KromaForge/rotate.html">
+    <meta property="og:site_name" content="KromaForge">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="KromaForge - Flip & Rotate Tool">
+    <meta name="twitter:description" content="Rotate your images by 90 degrees, fine angles, or flip horizontally and vertically.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="app-header"></header>
+
+    <div class="editor-layout">
+        <aside class="editor-sidebar"></aside>
+
+        <main class="editor-viewport">
+            <div class="viewport-header">
+                <h1 class="viewport-title">🔄 Flip & Rotate</h1>
+                <div class="viewport-actions">
+                    <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="canvas-wrapper">
+                <div class="canvas-container">
+                    <canvas id="editor-canvas" class="editor-canvas"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right settings panel -->
+        <section class="editor-control-panel">
+            <div class="panel-section">
+                <h3 class="panel-section-title">Rotate 90°</h3>
+                <div class="input-row">
+                    <button class="btn" id="rotate-left-btn">↩️ Left 90°</button>
+                    <button class="btn" id="rotate-right-btn">↪️ Right 90°</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Mirror Flips</h3>
+                <div class="input-row">
+                    <button class="btn" id="flip-h-btn">↔️ Flip Horizontal</button>
+                    <button class="btn" id="flip-v-btn">↕️ Flip Vertical</button>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="panel-section-title">Fine Angle Tuning</h3>
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Angle</span>
+                        <span class="control-value" id="angle-value">0°</span>
+                    </div>
+                    <input type="range" id="fine-angle" min="-45" max="45" value="0">
+                </div>
+            </div>
+
+            <div class="apply-actions">
+                <button class="btn btn-primary" id="download-btn">⬇️ Download Image</button>
+                <button class="btn btn-secondary" id="apply-btn">🔄 Apply Transformations</button>
+                <button class="btn btn-secondary" id="apply-next-btn">💾 Apply & Compress</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/rotate.js"></script>
+</body>
+</html>
