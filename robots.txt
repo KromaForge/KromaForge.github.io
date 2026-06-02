@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://progameryt01.github.io/KromaForge/sitemap.xml
+Sitemap: https://kromaforge.github.io/sitemap.xml
