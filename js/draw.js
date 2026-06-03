@@ -176,6 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         redraw();
+
+        if (e.cancelable) {
+            e.preventDefault();
+        }
     }
 
     // Interaction Move

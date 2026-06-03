@@ -164,13 +164,7 @@
         </section>
     </main>
 
-    <!-- Floating Resume Editing Banner -->
-    <div class="resume-banner glass-panel" id="resume-banner">
-        <span class="resume-banner-text">📂 Active session found! Resume editing your current image.</span>
-        <button class="btn btn-primary" id="resume-btn">✏️ Resume</button>
-        <button class="btn btn-danger" id="clear-btn">🗑️ Clear</button>
-        <button class="resume-banner-close" id="close-banner-btn">&times;</button>
-    </div>
+
 
     <!-- Scripts -->
     <script src="js/db.js"></script>
@@ -180,10 +174,11 @@
             const dropzone = document.getElementById('dropzone');
             const uploadBtn = document.getElementById('upload-btn');
             const fileInput = document.getElementById('file-input');
-            const resumeBanner = document.getElementById('resume-banner');
-            const resumeBtn = document.getElementById('resume-btn');
-            const clearBtn = document.getElementById('clear-btn');
-            const closeBannerBtn = document.getElementById('close-banner-btn');
+
+            // Automatically clear database on loading index page to ensure no session is saved
+            window.KromaDB.clearAll().then(() => {
+                console.log('Previous session cleared.');
+            });
 
             // Click upload button triggers hidden input file
             uploadBtn.addEventListener('click', () => fileInput.click());
@@ -233,31 +228,6 @@
                     window.KromaUI.showToast('Failed to load image.', 'danger');
                 });
             }
-
-            // Check if active session exists
-            window.KromaDB.getActiveImage().then(blob => {
-                if (blob) {
-                    resumeBanner.classList.add('show');
-                }
-            });
-
-            // Resume btn redirect to crop
-            resumeBtn.addEventListener('click', () => {
-                window.location.href = 'crop.html';
-            });
-
-            // Clear session btn
-            clearBtn.addEventListener('click', () => {
-                window.KromaDB.clearAll().then(() => {
-                    resumeBanner.classList.remove('show');
-                    window.KromaUI.showToast('Session cleared.', 'info');
-                });
-            });
-
-            // Close banner
-            closeBannerBtn.addEventListener('click', () => {
-                resumeBanner.classList.remove('show');
-            });
 
             // Interactive Search and Tag Filter
             const searchInput = document.getElementById('tool-search');

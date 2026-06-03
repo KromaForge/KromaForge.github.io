@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const widthInput = document.getElementById('crop-width');
     const heightInput = document.getElementById('crop-height');
     const downloadBtn = document.getElementById('download-btn');
+    const applyBtn = document.getElementById('apply-btn');
     const revertBtn = document.getElementById('revert-btn');
     const ratioSelector = document.getElementById('ratio-selector');
 
@@ -123,11 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
     });
 
-    document.addEventListener('mousemove', (e) => {
-        if (!isDragging && !isResizing) return;
-
-        const deltaX = e.clientX - startMouseX;
-        const deltaY = e.clientY - startMouseY;
+    function handleMove(clientX, clientY) {
+        const deltaX = clientX - startMouseX;
+        const deltaY = clientY - startMouseY;
         const cw = canvas.clientWidth;
         const ch = canvas.clientHeight;
 
@@ -263,6 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         applyBoxStyles();
         updatePixelDimensions();
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging && !isResizing) return;
+        handleMove(e.clientX, e.clientY);
     });
 
     document.addEventListener('mouseup', () => {
@@ -287,20 +291,14 @@ document.addEventListener('DOMContentLoaded', () => {
         startBoxY = boxY;
         startBoxW = boxW;
         startBoxH = boxH;
+        e.preventDefault();
     });
 
     document.addEventListener('touchmove', (e) => {
         if (!isDragging && !isResizing) return;
         const touch = e.touches[0];
-        const fakeEvent = {
-            clientX: touch.clientX,
-            clientY: touch.clientY,
-            preventDefault: () => e.preventDefault()
-        };
-        // Reuse mousemove logic
-        const moveEvent = new CustomEvent('mousemove');
-        Object.assign(moveEvent, fakeEvent);
-        document.dispatchEvent(moveEvent);
+        handleMove(touch.clientX, touch.clientY);
+        e.preventDefault();
     }, { passive: false });
 
     document.addEventListener('touchend', () => {
@@ -336,6 +334,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.KromaUI.saveCanvasToDB(tempCanvas, 'Image cropped successfully!', nextUrl);
     }
+
+    // Apply Crop Button click
+    applyBtn.addEventListener('click', () => {
+        performCrop('crop.html');
+    });
 
     // Download the cropped image
     downloadBtn.addEventListener('click', () => {

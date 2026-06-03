@@ -77,6 +77,14 @@
             border-radius: 50%;
             z-index: 7;
         }
+        .crop-handle::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+        }
         .handle-tl { top: -7px; left: -7px; cursor: nwse-resize; }
         .handle-tr { top: -7px; right: -7px; cursor: nesw-resize; }
         .handle-bl { bottom: -7px; left: -7px; cursor: nesw-resize; }
@@ -96,6 +104,7 @@
                 <h1 class="viewport-title">✂️ Image Cropper</h1>
                 <div class="viewport-actions">
                     <button class="btn btn-danger" id="revert-btn">🔄 Reset</button>
+                    <button class="btn btn-primary" id="download-btn">📤 Export</button>
                 </div>
             </div>
 
@@ -149,7 +158,7 @@
 
             <!-- Apply Actions -->
             <div class="apply-actions">
-                <button class="btn btn-primary" id="download-btn">📤 Export</button>
+                <button class="btn btn-secondary" id="apply-btn">✅ Apply Crop</button>
             </div>
         </section>
     </div>

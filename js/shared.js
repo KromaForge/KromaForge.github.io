@@ -246,10 +246,27 @@ function handleDirectUpload(file) {
 
 // Mobile navigation toggle
 function setupMobileControls() {
-    document.addEventListener('click', (e) => {
-        if (e.target && e.target.id === 'mobile-sidebar-toggle') {
+    let backdrop = document.getElementById('sidebar-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'sidebar-backdrop';
+        backdrop.className = 'sidebar-backdrop';
+        document.body.appendChild(backdrop);
+        backdrop.addEventListener('click', () => {
             const sidebar = document.querySelector('.editor-sidebar');
-            if (sidebar) sidebar.classList.toggle('open');
+            if (sidebar) sidebar.classList.remove('open');
+            backdrop.classList.remove('show');
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        const toggleBtn = e.target.closest('#mobile-sidebar-toggle');
+        if (toggleBtn) {
+            const sidebar = document.querySelector('.editor-sidebar');
+            if (sidebar) {
+                const isOpen = sidebar.classList.toggle('open');
+                backdrop.classList.toggle('show', isOpen);
+            }
         }
     });
 
@@ -280,6 +297,9 @@ function setupMobileControls() {
             const isCollapsed = panel.classList.toggle('collapsed');
             if (layout) {
                 layout.classList.toggle('panel-collapsed', isCollapsed);
+            }
+            if (isCollapsed) {
+                panel.scrollTop = 0;
             }
             toggleBtn.innerHTML = isCollapsed ? '▲ Show Settings' : '▼ Hide Settings';
         });
