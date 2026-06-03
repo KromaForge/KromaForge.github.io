@@ -252,10 +252,10 @@ header.app-header {
         padding: 0 0.5rem;
     }
     .dropzone {
-        padding: 2rem 1.25rem;
+        padding: 2.2rem 1.25rem;
     }
     .dropzone-icon {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
     }
     .dropzone-title {
         font-size: 1.1rem;
@@ -264,18 +264,20 @@ header.app-header {
         font-size: 0.85rem;
     }
     .nav-wrap {
-        padding: 0 1rem;
+        padding: 0.75rem 1rem;
         gap: 0.75rem;
         flex-wrap: wrap;
+        align-items: center;
     }
     .nav-links {
         flex: 1 1 100%;
         justify-content: flex-end;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
-    .btn {
-        width: 100%;
-        justify-content: center;
+    .nav-links .btn {
+        width: auto;
+        min-width: 120px;
     }
     .tools-section {
         padding: 0 0.5rem 4rem;
@@ -291,6 +293,7 @@ header.app-header {
     }
     .search-filter-container {
         padding: 1rem;
+        align-items: stretch;
     }
     .search-wrapper {
         max-width: 100%;
@@ -299,30 +302,40 @@ header.app-header {
         font-size: 0.95rem;
     }
     .filter-tags {
-        justify-content: stretch;
+        justify-content: center;
     }
     .filter-btn {
         flex: 1 1 auto;
-        min-width: 120px;
+        min-width: 0;
+        width: auto;
     }
     .resume-banner {
         width: calc(100% - 2rem);
         left: 50%;
         transform: translateX(-50%);
         bottom: 1rem;
-        padding: 1rem 1rem 0.9rem;
+        padding: 1rem;
         flex-direction: column;
         align-items: stretch;
         gap: 0.75rem;
     }
     .resume-banner-text {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     .footer-wrap {
         padding: 0 1rem;
     }
     .app-footer {
         padding: 2rem 0 1.25rem 0;
+    }
+    .toast {
+        min-width: auto;
+        max-width: min(90vw, 340px);
+    }
+    .toast-container {
+        top: 16px;
+        right: 16px;
+        left: auto;
     }
 }
 
@@ -370,6 +383,40 @@ header.app-header {
     }
     .error-title {
         font-size: 1.5rem;
+    }
+    .search-filter-container {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    .filter-btn {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.82rem;
+    }
+    .editor-sidebar {
+        width: 220px;
+    }
+    .editor-control-panel {
+        height: auto;
+        max-height: 46vh;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        background: #09090b;
+        padding: 1rem 0.9rem;
+        overflow-y: auto;
+    }
+    .editor-viewport {
+        height: calc(100vh - 72px - min(46vh, 280px));
+        min-height: 240px;
+    }
+    .mobile-sidebar-toggle {
+        width: auto;
+    }
+    .app-container {
+        padding: 0 1rem;
     }
 }
 
