@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoOpacityVal = document.getElementById('logo-opacity-val');
 
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let loadedImg = null;
@@ -302,8 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 'image/png');
     });
 
-    applyBtn.addEventListener('click', () => performTextApply());
-    applyNextBtn.addEventListener('click', () => performTextApply('draw.html'));
 
     // Revert
     revertBtn.addEventListener('click', () => {

@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.getElementById('download-btn');
     const undoBtn = document.getElementById('undo-btn');
     const revertBtn = document.getElementById('revert-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
 
     let loadedImg = null;
     let originalFilename = 'image.png';
@@ -325,6 +323,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 'image/png');
     });
 
-    applyBtn.addEventListener('click', () => performDrawSave());
-    applyNextBtn.addEventListener('click', () => performDrawSave('retro.html'));
 });

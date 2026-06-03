@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const savingsValue = document.getElementById('savings-value');
 
     const downloadBtn = document.getElementById('download-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let originalSize = 0;
@@ -133,31 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             window.KromaUI.showToast(`Downloaded ${outName} successfully!`);
         }, activeFormat, activeQuality);
-    });
-
-    // Save & continue handler
-    applyNextBtn.addEventListener('click', () => {
-        // Save to DB in lossless PNG format to preserve maximum quality for subsequent edits,
-        // but save the user's format settings in filename metadata.
-        canvas.toBlob((blob) => {
-            if (!blob) return;
-            
-            window.KromaDB.setActiveImage(blob).then(() => {
-                const extMap = {
-                    'image/png': 'png',
-                    'image/jpeg': 'jpg',
-                    'image/webp': 'webp'
-                };
-                const newExt = extMap[activeFormat];
-                let baseName = originalFilename.substring(0, originalFilename.lastIndexOf('.')) || originalFilename;
-                window.KromaDB.setFilename(`${baseName}.${newExt}`);
-                
-                window.KromaUI.showToast('Format configuration saved!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'pad.html';
-                }, 500);
-            });
-        }, 'image/png'); // Preserve editing layers losslessly
     });
 
     // Revert

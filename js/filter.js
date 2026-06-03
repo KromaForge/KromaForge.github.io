@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const presetsGrid = document.getElementById('presets-grid');
     const downloadBtn = document.getElementById('download-btn');
     const revertBtn = document.getElementById('revert-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
 
     // Adjustment sliders
     const sliders = {
@@ -171,8 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 'image/png');
     });
 
-    applyBtn.addEventListener('click', () => performFilterApply());
-    applyNextBtn.addEventListener('click', () => performFilterApply('rotate.html'));
 
     // Revert/Reset Button logic
     revertBtn.addEventListener('click', () => {

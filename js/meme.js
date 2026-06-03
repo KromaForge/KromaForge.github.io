@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const capsCheckbox = document.getElementById('caps-chk');
 
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let loadedImg = null;
@@ -137,11 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             window.KromaUI.showToast(`Meme ${outName} downloaded!`);
         }, 'image/png');
-    });
-
-    // Save changes back to session
-    applyBtn.addEventListener('click', () => {
-        window.KromaUI.saveCanvasToDB(canvas, 'Meme text layers saved back to active session!');
     });
 
     // Revert

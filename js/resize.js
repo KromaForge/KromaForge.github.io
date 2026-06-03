@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const smoothScalingCheckbox = document.getElementById('smooth-scaling');
     const originalResLabel = document.getElementById('original-resolution');
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let loadedImage = null;
@@ -153,9 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.KromaUI.showToast(`Downloaded ${outName} successfully!`);
         }, 'image/png');
     });
-
-    applyBtn.addEventListener('click', () => performResize());
-    applyNextBtn.addEventListener('click', () => performResize('filter.html'));
 
     // Reset button
     revertBtn.addEventListener('click', () => {

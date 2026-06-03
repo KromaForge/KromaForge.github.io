@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fineAngleSlider = document.getElementById('fine-angle');
     const angleValueLabel = document.getElementById('angle-value');
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let loadedImg = null;
@@ -132,8 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 'image/png');
     });
 
-    applyBtn.addEventListener('click', () => performTransform());
-    applyNextBtn.addEventListener('click', () => performTransform('convert.html'));
 
     // Revert logic
     revertBtn.addEventListener('click', () => {

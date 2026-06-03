@@ -981,9 +981,39 @@ input[type="range"]::-webkit-slider-thumb:hover {
         border-left: none;
         border-top: 1px solid var(--border-color);
         background: #09090b;
+        transition: transform 0.3s ease;
+    }
+    .editor-control-panel.collapsed {
+        transform: translateY(calc(100% - 40px));
     }
     .editor-viewport {
         height: calc(100vh - 72px - 280px);
+        transition: height 0.3s ease;
+    }
+    .editor-layout.panel-collapsed .editor-viewport {
+        height: calc(100vh - 72px - 40px);
+    }
+    .mobile-panel-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 40px;
+        background: var(--color-primary);
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        cursor: pointer;
+        z-index: 31;
+        font-size: 0.9rem;
+        gap: 8px;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+    }
+    .mobile-panel-toggle:hover {
+        background: var(--color-primary-hover);
     }
 }
 

@@ -252,6 +252,41 @@ function setupMobileControls() {
             if (sidebar) sidebar.classList.toggle('open');
         }
     });
+
+    const panel = document.querySelector('.editor-control-panel');
+    if (!panel) return;
+
+    const updatePanelToggle = () => {
+        const layout = document.querySelector('.editor-layout');
+        const existingToggle = panel.querySelector('#mobile-panel-toggle');
+        if (window.innerWidth > 768) {
+            if (existingToggle) {
+                existingToggle.remove();
+            }
+            panel.classList.remove('collapsed');
+            if (layout) layout.classList.remove('panel-collapsed');
+            return;
+        }
+
+        if (existingToggle) return;
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.id = 'mobile-panel-toggle';
+        toggleBtn.className = 'mobile-panel-toggle';
+        toggleBtn.innerHTML = '▼ Hide Settings';
+        panel.insertBefore(toggleBtn, panel.firstChild);
+
+        toggleBtn.addEventListener('click', () => {
+            const isCollapsed = panel.classList.toggle('collapsed');
+            if (layout) {
+                layout.classList.toggle('panel-collapsed', isCollapsed);
+            }
+            toggleBtn.innerHTML = isCollapsed ? '▲ Show Settings' : '▼ Hide Settings';
+        });
+    };
+
+    updatePanelToggle();
+    window.addEventListener('resize', updatePanelToggle);
 }
 
 // Automatic Footer Injection

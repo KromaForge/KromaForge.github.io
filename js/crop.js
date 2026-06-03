@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const widthInput = document.getElementById('crop-width');
     const heightInput = document.getElementById('crop-height');
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
     const ratioSelector = document.getElementById('ratio-selector');
 
@@ -379,12 +377,9 @@ document.addEventListener('DOMContentLoaded', () => {
             link.click();
             document.body.removeChild(link);
 
-            window.KromaUI.showToast(`Downloaded ${outName} successfully!`);
+            window.KromaUI.showToast(`Exported ${outName} successfully!`);
         }, 'image/png');
     });
-
-    applyBtn.addEventListener('click', () => performCrop());
-    applyNextBtn.addEventListener('click', () => performCrop('resize.html'));
 
     // Revert/Reset Button logic
     revertBtn.addEventListener('click', () => {

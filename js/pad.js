@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const scaleValueLabel = document.getElementById('scale-value');
     
     const downloadBtn = document.getElementById('download-btn');
-    const applyBtn = document.getElementById('apply-btn');
-    const applyNextBtn = document.getElementById('apply-next-btn');
     const revertBtn = document.getElementById('revert-btn');
 
     let loadedImg = null;
@@ -190,9 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.KromaUI.showToast(`Downloaded ${outName} successfully!`);
         }, 'image/png');
     });
-
-    applyBtn.addEventListener('click', () => performPadding());
-    applyNextBtn.addEventListener('click', () => performPadding('text.html'));
 
     // Revert
     revertBtn.addEventListener('click', () => {
